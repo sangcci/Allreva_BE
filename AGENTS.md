@@ -37,15 +37,15 @@ DOCS_ROOT="${ALLREVA_DOCS_ROOT:-$(dirname "$MAIN_WORKTREE")/Allreva_Docs}"
 ./gradlew spotlessCheck
 ```
 
-Palantir 가 import 정렬, 미사용 import 제거, 공백/줄바꿈/들여쓰기를 자동 처리한다.
+Palantir가 import 정렬, 미사용 import 제거, 공백/줄바꿈/들여쓰기를 자동 처리한다.
 따라서 import 순서는 직접 맞추려 하지 말고 `spotlessApply` 결과를 따른다.
 
 ### Git Lint 도구
 
 - **git-branch**: 이슈 번호와 컨벤션을 받아 최신 base 브랜치에서 네이밍 규칙에 맞는 브랜치 생성
-- **git-commit**: git diff 와 git log 를 분석해 컨벤션에 맞는 커밋 메시지 생성, 여러 단위 변경 시 커밋 분리 제안
+- **git-commit**: git diff와 git log를 분석해 컨벤션에 맞는 커밋 메시지 생성, 여러 단위 변경 시 커밋 분리 제안
 - **github-issue**: 이슈 번호(#12 형식)로 이슈 생성 후 branch 연결, 새 기능/버그 수정/개선 작업 시작 시 사용
-- **github-pr**: 커밋과 diff 분석해 제목·본문·label 자동 구성, 프로젝트 AGENTS.md 의 PR 컨벤션 우선 적용
+- **github-pr**: 커밋과 diff 분석해 제목·본문·label 자동 구성, 프로젝트 AGENTS.md의 PR 컨벤션 우선 적용
 
 ## 아키텍처 제약
 
