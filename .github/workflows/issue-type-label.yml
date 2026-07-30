@@ -1,0 +1,64 @@
+name: Issue Type Label
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    if: github.event.issue.body != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply the selected work type label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body ?? "";
+            const workTypeSection = body.match(/### 작업 유형\s*\r?\n\s*([^\r\n]*)/);
+            if (!workTypeSection) {
+              core.info("This is not a common work issue.");
+              return;
+            }
+
+            const labelsByType = {
+              REFACTOR: "🔨 refactor",
+              TEST: "✅ test",
+              DOCS: "📝 docs",
+              CI: "⚙️ ci",
+              CHORE: "🔧 chore",
+              PERF: "👟 performance",
+            };
+            const managedLabels = Object.values(labelsByType);
+            const selectedLabel = labelsByType[workTypeSection[1].trim()];
+            const issue = context.payload.issue;
+            const existingLabels = issue.labels.map((label) =>
+              typeof label === "string" ? label : label.name,
+            );
+
+            for (const label of existingLabels) {
+              if (managedLabels.includes(label) && label !== selectedLabel) {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  name: label,
+                });
+              }
+            }
+
+            if (!selectedLabel) {
+              core.warning("The selected work type is empty or unsupported.");
+              return;
+            }
+
+            if (!existingLabels.includes(selectedLabel)) {
+              await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: [selectedLabel],
+              });
+            }
