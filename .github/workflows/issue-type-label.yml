@@ -17,8 +17,8 @@ jobs:
         with:
           script: |
             const body = context.payload.issue.body ?? "";
-            const match = body.match(/### 작업 유형\s*\r?\n\s*(REFACTOR|TEST|DOCS|CI|CHORE|PERF)\s*(?:\r?\n|$)/);
-            if (!match) {
+            const workTypeSection = body.match(/### 작업 유형\s*\r?\n\s*([^\r\n]*)/);
+            if (!workTypeSection) {
               core.info("This is not a common work issue.");
               return;
             }
@@ -32,7 +32,7 @@ jobs:
               PERF: "👟 performance",
             };
             const managedLabels = Object.values(labelsByType);
-            const selectedLabel = labelsByType[match[1]];
+            const selectedLabel = labelsByType[workTypeSection[1].trim()];
             const issue = context.payload.issue;
             const existingLabels = issue.labels.map((label) =>
               typeof label === "string" ? label : label.name,
@@ -49,11 +49,16 @@ jobs:
               }
             }
 
+            if (!selectedLabel) {
+              core.warning("The selected work type is empty or unsupported.");
+              return;
+            }
+
             if (!existingLabels.includes(selectedLabel)) {
               await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                labels: [selectedLabel],
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  labels: [selectedLabel],
               });
             }
