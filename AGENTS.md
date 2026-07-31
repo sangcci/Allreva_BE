@@ -10,8 +10,8 @@
 
 사람이 읽는 공식 기록은 `Allreva_Docs`에 둔다. worktree에서도 같은 위치를 찾기 위해 아래 순서로 문서 루트를 확인한다.
 
-1. `ALLREVA_DOCS_ROOT` 환경 변수가 있으면 그 경로를 사용한다.
-2. 없으면 primary worktree의 부모 디렉터리 아래 `Allreva_Docs`를 찾는다.
+1. `ALLREVA_DOCS_ROOT` 환경 변수가 설정되어 있고 비어있지 않으면 그 경로를 사용한다.
+2. 없거나 비어 있으면 primary worktree의 부모 디렉터리 아래 `Allreva_Docs`를 찾는다.
 
 ```bash
 MAIN_WORKTREE=$(git worktree list --porcelain | awk '/^worktree / {print $2; exit}')
@@ -31,8 +31,8 @@ DOCS_ROOT="${ALLREVA_DOCS_ROOT:-$(dirname "$MAIN_WORKTREE")/Allreva_Docs}"
 
 Agent 실행 흐름은 로컬 `Allreva_Harness`에 둔다. 사람용 정책은 중앙 Docs를, 실행 절차는 Harness를 기준으로 한다.
 
-1. `ALLREVA_HARNESS_ROOT` 환경 변수가 있으면 그 경로를 사용한다.
-2. 없으면 primary worktree의 부모 디렉터리 아래 `Allreva_Harness`를 찾는다.
+1. `ALLREVA_HARNESS_ROOT` 환경 변수가 설정되어 있고 비어있지 않으면 그 경로를 사용한다.
+2. 없거나 비어 있으면 primary worktree의 부모 디렉터리 아래 `Allreva_Harness`를 찾는다.
 
 ```bash
 MAIN_WORKTREE=$(git worktree list --porcelain | awk '/^worktree / {print $2; exit}')
