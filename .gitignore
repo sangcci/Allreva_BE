@@ -60,11 +60,33 @@ out/
 
 ### AI Tools ###
 .claude/
+!.claude/
+.claude/*
+!.claude/agents/
+.claude/agents/*
+!.claude/agents/explain-diff.md
+!.claude/agents/git-workflow.md
 .superpowers/
 .cursor/
 .copilot/
+.codex/
+!.codex/
+.codex/*
+!.codex/agents/
+.codex/agents/*
+!.codex/agents/explain-diff.toml
+!.codex/agents/git-workflow.toml
 .aider*
 .pi/
+!.pi/
+.pi/*
+!.pi/agents/
+.pi/agents/*
+!.pi/agents/explain-diff.md
+!.pi/agents/git-workflow.md
+!.pi/extensions/
+.pi/extensions/*
+!.pi/extensions/allreva-git-write.ts
 docs/*
 !docs/overview.md
 !docs/main-sequences.md
