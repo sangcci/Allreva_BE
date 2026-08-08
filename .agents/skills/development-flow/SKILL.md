@@ -8,7 +8,7 @@ description: Allreva BE에서 여러 파일·모듈·운영 영향이 있는 변
 이 Skill은 공통 흐름 연결층이다. `AGENTS.md`의 의무 개발 workflow를 따른다.
 
 1. 현재 프로젝트의 `AGENTS.md`를 읽고 Docs와 Harness 경로를 계산한다.
-2. Task Issue와 RFC를 확인하고, 관련 문서를 읽어 조사와 계획을 끝낸다.
+2. 관련 문서를 읽어 조사·논의를 끝내고 계획 승인을 받은 뒤 모든 Task의 Issue를 생성한다. 새 workflow에서는 RFC를 만들거나 연결하지 않으며, 과거 RFC는 근거 자료로만 사용한다. 오래 유지할 중요한 결정만 ADR로 기록한다.
 3. 사용자에게 아래 문구로 workflow 진입 승인을 받고, 명시적 승인 전 구현을 시작하지 않는다.
 
    ```text
