@@ -28,8 +28,9 @@ Wait for explicit approval before workflow entry. After approval:
 
 1. Validate branch against `.allreva/git-workflow.json`; create task worktrees only under ignored repository-local `.worktrees/`.
 2. Implement and verify requested change.
-3. Before PR creation, run `explain-diff` and obtain user understanding approval. Then present proposed PR title, body, validation evidence, and residual risks; obtain separate explicit PR-creation approval.
-4. User squash-merges PR. Perform local worktree or branch cleanup only after user cleanup signal.
+3. Before PR review or creation, run a PR completeness preflight. Compare intended diff against `git status --short`, `git diff --cached --name-status`, `git diff --name-status`, and `git status --ignored --short`; inspect ignored/generated paths relevant to task. Every remaining change or path needs explicit include, exclude, or expected-generated/ignored explanation. Block PR review and creation until each unexplained change is removed or explained.
+4. Before PR creation, run `explain-diff` and obtain user understanding approval. Then present proposed PR title, body, validation evidence, and residual risks; obtain separate explicit PR-creation approval.
+5. User squash-merges PR. Perform local worktree or branch cleanup only after user cleanup signal.
 
 `$HARNESS_ROOT` supplies shared workflow guidance and role contracts. Project-tracked adapters expose `explain-diff` and `git-workflow`: Pi uses a scoped custom tool with native confirmation; Codex and Claude are policy-only and host/user configuration can weaken their boundary. `.pi/` local settings remain ignored. Existing GitHub title-lint workflows remain final remote title validation.
 

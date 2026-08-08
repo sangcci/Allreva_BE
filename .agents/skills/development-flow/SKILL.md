@@ -16,7 +16,8 @@ description: Allreva BE에서 여러 파일·모듈·운영 영향이 있는 변
    ```
 
 4. 승인 뒤 `.allreva/git-workflow.json` 기준 branch를 검증하고, repository-local `.worktrees/`만 사용한다.
-5. 구현·검증 뒤 PR 전 `explain-diff` 사용자 이해 승인을 받는다. 이어 제안 PR 제목·본문, 검증 근거, 잔여 위험을 제시한 뒤 별도 명시적 PR 생성 승인을 받는다. squash merge와 local cleanup은 각각 사용자 행동·cleanup signal 뒤에만 진행한다.
-6. `$HARNESS_ROOT/skills/development-flow/SKILL.md`를 읽어 공통 역할 계약을 따른다. Project-tracked adapter는 `explain-diff`와 `git-workflow`를 제공한다. Pi는 scoped custom tool과 native confirmation을 사용하며, Codex·Claude는 host/user configuration으로 경계가 약화될 수 있는 policy-only adapter다.
+5. PR review 또는 생성 전 completeness preflight를 수행한다. 의도한 diff를 `git status --short`, `git diff --cached --name-status`, `git diff --name-status`, `git status --ignored --short`와 비교하고, Task 관련 ignored/generated path를 확인한다. 남은 모든 변경·path에 include, exclude, expected-generated/ignored 설명을 명시한다. 설명되지 않은 변경은 제거하거나 설명할 때까지 PR review와 생성을 막는다.
+6. 구현·검증 뒤 PR 전 `explain-diff` 사용자 이해 승인을 받는다. 이어 제안 PR 제목·본문, 검증 근거, 잔여 위험을 제시한 뒤 별도 명시적 PR 생성 승인을 받는다. squash merge와 local cleanup은 각각 사용자 행동·cleanup signal 뒤에만 진행한다.
+7. `$HARNESS_ROOT/skills/development-flow/SKILL.md`를 읽어 공통 역할 계약을 따른다. Project-tracked adapter는 `explain-diff`와 `git-workflow`를 제공한다. Pi는 scoped custom tool과 native confirmation을 사용하며, Codex·Claude는 host/user configuration으로 경계가 약화될 수 있는 policy-only adapter다.
 
 구현과 검증은 현재 프로젝트 테스트·Git 규칙을 우선한다. Harness 경로가 없으면 추측하지 말고 사용자에게 위치를 확인한다.
