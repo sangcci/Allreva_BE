@@ -78,6 +78,7 @@ out/
 !.codex/agents/git-workflow.toml
 .aider*
 .pi/
+.pi-subagents/
 !.pi/
 .pi/*
 !.pi/agents/
@@ -104,3 +105,4 @@ query-optimization-test/
 
 ### Seed Data ###
 src/main/resources/seed/
+allreva-support/db/src/main/resources/db/seed/
