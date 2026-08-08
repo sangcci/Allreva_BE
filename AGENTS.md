@@ -18,7 +18,7 @@ Before work, read `$DOCS_ROOT/INDEX.md` and the applicable current document. Do 
 
 ## Mandatory Development Workflow
 
-Every task requires an Issue and RFC. Before implementation, complete research and a plan, then ask user exactly:
+Before creating an Issue, complete research and discussion, then obtain approval for the plan. Every task requires an Issue. New workflow does not create or link RFCs; historical RFCs are evidence only. Record only durable, important decisions in an ADR. Before implementation, ask user exactly:
 
 ```text
 이제 이 작업에 대해 개발 workflow로 전환해서 진행할까요?
